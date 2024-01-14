@@ -1,3 +1,4 @@
+# This project utilizes the following Superstore Data:
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
     item_name TEXT,
@@ -24,3 +25,31 @@ VALUES
     (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+# Use a SELECT statement to order the items by price.
+SELECT item_name, price
+FROM superstore
+ORDER BY price;
+
+# Use SUM to display a statistic about the item prices.
+SELECT SUM(price), item_name
+FROM superstore
+GROUP BY item_name;
+
+#Use MAX to display the item with the highest price.
+SELECT item_name, MAX(price) AS max_price
+FROM superstore
+GROUP BY item_name
+ORDER BY max_price DESC
+LIMIT 1;
+
+#Show a statistic about the price for items in the category of "Kitchen Supplies"
+SELECT item_name, category, price
+FROM superstore
+WHERE category = "Kitchen Supplies"
+ORDER BY price;
+
+#Determine the stock of "Cozy Throw Blanket" currently available
+SELECT item_name, (stock_quantity)
+FROM superstore
+WHERE item_name = "Cozy Throw Blanket";
