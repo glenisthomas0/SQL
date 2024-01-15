@@ -1,0 +1,44 @@
+#This project utilizes the following famous people data 
+
+CREATE TABLE celebrities (
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+fullname TEXT, 
+age INTEGER);
+
+INSERT INTO celebrities (fullname, age) VALUES ("Megan Fox", "37");
+INSERT INTO celebrities (fullname, age) VALUES ("Jennifer Lawrence", "33");
+INSERT INTO celebrities (fullname, age) VALUES ("Margot Robbie", "33");
+INSERT INTO celebrities (fullname, age) VALUES ("Emma Watson", "33");
+
+CREATE TABLE movies (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+person_id INTEGER,
+name TEXT);
+
+INSERT INTO movies (person_id, name) VALUES (1,"Transformers");
+INSERT INTO movies (person_id, name) VALUES (1, "Ninja Turtles");
+INSERT INTO movies (person_id, name) VALUES (2, "Hunger Games");
+INSERT INTO movies (person_id, name) VALUES (2, "X-Men");
+INSERT INTO movies (person_id, name) VALUES (3, "Suicide Squad");
+INSERT INTO movies (person_id, name) VALUES (3, "Barbie");
+INSERT INTO movies (person_id, name) VALUES (4, "Harry Potter");
+INSERT INTO movies (person_id, name) VALUES (4, "Beauty and the Beast");
+
+SELECT *
+FROM celebrities;
+
+SELECT *
+FROM movies;
+
+#Use JOIN to join together the two tables based on their common factor
+SELECT celebrities.fullname, movies.name
+FROM celebrities
+JOIN movies
+ON celebrities.id = movies.person_id;
+
+#Use LEFT JOIN to join the two tables together, and then the CONCAT function to merge data from multiple rows into one field 
+SELECT celebrities.fullname, GROUP_CONCAT(movies.name)
+FROM celebrities
+LEFT JOIN movies
+ON celebrities.id = movies.person_id
+GROUP BY celebrities.fullname;
